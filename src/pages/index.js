@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import Post from '../components/Post';
+import PostForm from '../components/PostForm';
 import styles from '../styles/Home.module.scss';
 
 export default function Home() {
@@ -14,26 +16,21 @@ export default function Home() {
 
         <ul className={styles.posts}>
           <li>
-            <p className={styles.postsContent}>I'm tring to learn Figma!</p>
-            <p>4/13/2021</p>
+            <Post content='Yo! Whatup though?' date='4/13/2021' />
           </li>
           <li>
-            <p className={styles.postsContent}>Here is another message.</p>
-            <p>4/13/2021</p>
+            <Post content='Here is another post.' date='4/13/2021' />
           </li>
           <li>
-            <p className={styles.postsContent}>
-              And yet another message. Super exciting content.
-            </p>
-            <p>4/13/2021</p>
+            <Post content='And some more shit.' date='4/13/2021' />
           </li>
         </ul>
 
         <form>
-          <textarea
-            className={styles.postText}
+          {/* <textarea
+            className={styles.postForm}
             aria-label='Write your post'
-          ></textarea>
+          ></textarea> */}
           <button>Add New Post</button>
         </form>
       </main>

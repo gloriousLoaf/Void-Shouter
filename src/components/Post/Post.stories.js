@@ -7,7 +7,7 @@ export default {
   component: Post,
 };
 
-const Template = (args) => (
+const Template = () => (
   <Post content='Here is another post.' date='4/13/2021' />
 );
 

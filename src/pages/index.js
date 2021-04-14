@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Bio from '../components/Bio';
 import Post from '../components/Post';
 import PostForm from '../components/PostForm';
 import styles from '../styles/Home.module.scss';
@@ -12,7 +13,12 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Void Shouter</h1>
+        <Bio
+          headshot='https://pbs.twimg.com/profile_images/1289388663311175680/oMuZZv67_400x400.jpg'
+          name='David Metcalf'
+          tagline='web developer'
+          role='frontend @ MLtwist.com'
+        />
 
         <ul className={styles.posts}>
           <li>
@@ -29,13 +35,7 @@ export default function Home() {
           </li>
         </ul>
 
-        <form>
-          {/* <textarea
-            className={styles.postForm}
-            aria-label='Write your post'
-          ></textarea> */}
-          <button>Add New Post</button>
-        </form>
+        <PostForm />
       </main>
     </div>
   );

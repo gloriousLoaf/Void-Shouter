@@ -1,0 +1,32 @@
+$primary: #7e59e7;
+
+.bio {
+  display: flex;
+  align-items: center;
+  img {
+    border-radius: 50%;
+    height: auto;
+    width: 12rem;
+  }
+  // wrapper for bio details
+  div:nth-child(2) {
+    margin-left: 2rem;
+  }
+  p:first-child {
+    color: $primary;
+    font-weight: 900;
+    font-size: 2.5rem;
+    line-height: 3rem;
+    margin: 0rem auto;
+  }
+  p:nth-child(2) {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin: 0.25rem auto;
+  }
+  p:last-child {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin: 0 auto;
+  }
+}

@@ -7,6 +7,6 @@ export default {
   component: PostForm,
 };
 
-const Template = (args) => <PostForm />;
+const Template = () => <PostForm />;
 
 export const Default = Template.bind({});

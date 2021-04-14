@@ -3,7 +3,24 @@
   line-height: 1.8rem;
   margin-bottom: 0.25rem;
 
-  & + p {
+  &:first-child {
     margin-top: 0.25rem;
+  }
+
+  & + ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+  }
+
+  & + ul > li {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+  }
+  // FA icons
+  & + ul > li > svg {
+    margin-right: 0.25rem;
   }
 }

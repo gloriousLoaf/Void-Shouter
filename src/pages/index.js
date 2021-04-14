@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Void Shouter</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
@@ -16,7 +16,10 @@ export default function Home() {
 
         <ul className={styles.posts}>
           <li>
-            <Post content='Yo! Whatup though?' date='4/13/2021' />
+            <Post
+              content='Yo! This is a post. Writing a longer post to spread things out, hopefully?'
+              date='4/13/2021'
+            />
           </li>
           <li>
             <Post content='Here is another post.' date='4/13/2021' />

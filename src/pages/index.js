@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import Head from 'next/head';
 import Bio from '../components/Bio';
@@ -5,10 +6,21 @@ import Post from '../components/Post';
 import PostForm from '../components/PostForm';
 import styles from '../styles/Home.module.scss';
 
-export default function Home() {
-  const { user, logIn, logOut } = useAuth();
+export default function Home({ posts: defaultPosts }) {
+  const [posts, updatePosts] = useState(defaultPosts);
 
-  console.log('user', user);
+  useEffect(() => {
+    const run = async () => {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`
+      );
+      const { posts } = await response.json();
+      updatePosts(posts);
+    };
+    run();
+  }, []);
+
+  const { user, logIn, logOut } = useAuth();
 
   return (
     <div className={styles.container}>
@@ -38,18 +50,20 @@ export default function Home() {
         />
 
         <ul className={styles.posts}>
-          <li>
-            <Post
-              content='Yo! This is a post. Writing a longer post to spread things out, hopefully?'
-              date='4/13/2021'
-            />
-          </li>
-          <li>
-            <Post content='Here is another post.' date='4/13/2021' />
-          </li>
-          <li>
-            <Post content='And some more shit.' date='4/13/2021' />
-          </li>
+          {posts.map((post) => {
+            const { content, id, date } = post;
+            return (
+              <li key={id}>
+                <Post
+                  content={content}
+                  date={new Intl.DateTimeFormat('en-US', {
+                    dateStyle: 'short',
+                    timeStyle: 'short',
+                  }).format(new Date(date))}
+                />
+              </li>
+            );
+          })}
         </ul>
 
         {user && <PostForm />}
@@ -57,3 +71,16 @@ export default function Home() {
     </div>
   );
 }
+
+export const getStaticProps = async () => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`
+  );
+  const { posts } = await response.json();
+
+  return {
+    props: {
+      posts,
+    },
+  };
+};

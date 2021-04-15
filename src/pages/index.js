@@ -1,3 +1,4 @@
+import { useAuth } from '../hooks/useAuth';
 import Head from 'next/head';
 import Bio from '../components/Bio';
 import Post from '../components/Post';
@@ -5,12 +6,28 @@ import PostForm from '../components/PostForm';
 import styles from '../styles/Home.module.scss';
 
 export default function Home() {
+  const { user, logIn, logOut } = useAuth();
+
+  console.log('user', user);
+
   return (
     <div className={styles.container}>
       <Head>
         <title>Void Shouter</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
+
+      {!user && (
+        <p>
+          <button onClick={logIn}>login</button>
+        </p>
+      )}
+
+      {user && (
+        <p>
+          <button onClick={logOut}>logout</button>
+        </p>
+      )}
 
       <main className={styles.main}>
         <Bio
@@ -35,7 +52,7 @@ export default function Home() {
           </li>
         </ul>
 
-        <PostForm />
+        {user && <PostForm />}
       </main>
     </div>
   );

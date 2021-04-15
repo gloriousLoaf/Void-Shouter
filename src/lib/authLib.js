@@ -6,7 +6,9 @@ export const init = (cb) => {
   netlifyIdentity.on('init', (user) => {
     cb(user);
   });
-  netlifyIdentity.init();
+  netlifyIdentity.init({
+    APIUrl: process.env.NEXT_PUBLIC_AUTH_ENDPOINT,
+  });
 };
 
 export const authLogIn = (cb) => {

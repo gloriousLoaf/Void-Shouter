@@ -35,12 +35,20 @@ export default function Home({ posts: defaultPosts }) {
       </Head>
 
       <main className={styles.main}>
-        <Bio
-          headshot={userMetadata.avatar_url}
-          name={userMetadata.full_name}
-          tagline='this is your void.'
-          role='what will you shout?'
-        />
+        {user ? (
+          <Bio
+            headshot={userMetadata.avatar_url}
+            name={userMetadata.full_name}
+            tagline='this is your void.'
+            role='what will you shout?'
+          />
+        ) : (
+          <Bio
+            name='Welcome'
+            tagline='this can be your void.'
+            role='login in with github to shout.'
+          />
+        )}
 
         <ul className={styles.posts}>
           {postsSorted.map((post) => {

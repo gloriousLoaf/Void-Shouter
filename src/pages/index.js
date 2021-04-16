@@ -12,7 +12,7 @@ export default function Home({ posts: defaultPosts }) {
 
   const { user, logIn, logOut } = useAuth();
 
-  const { user_metadata: userMetadata } = user;
+  // const { user_metadata: userMetadata } = user;
 
   const postsSorted = posts.sort((a, b) => {
     return new Date(b.date) - new Date(a.date);
@@ -36,48 +36,52 @@ export default function Home({ posts: defaultPosts }) {
 
       <main className={styles.main}>
         {user ? (
-          <Bio
-            headshot={userMetadata.avatar_url}
-            name={userMetadata.full_name}
-            tagline='this is your void.'
-            role='what will you shout?'
-          />
+          <>
+            <Bio
+              headshot={user.user_metadata.avatar_url}
+              name={user.user_metadata.full_name}
+              tagline='This is your void.'
+              role='No one can hear you shout.'
+            />
+
+            <ul className={styles.posts}>
+              {postsSorted.map((post) => {
+                const { content, id, date } = post;
+                return (
+                  <li key={id}>
+                    <Post
+                      content={content}
+                      date={new Intl.DateTimeFormat('en-US', {
+                        dateStyle: 'short',
+                        timeStyle: 'short',
+                      }).format(new Date(date))}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+            {user && <PostForm onSubmit={handleSubmit} />}
+          </>
         ) : (
           <Bio
-            name='Welcome'
-            tagline='this can be your void.'
-            role='login in with github to shout.'
+            headshot='https://www.pinclipart.com/picdir/big/563-5631288_megaphone-icon-megaphone-emoji-black-and-white-clipart.png'
+            name='Welcome to Void Shouter'
+            tagline='This could be your void.'
+            role='Login with GitHub to shout.'
           />
         )}
 
-        <ul className={styles.posts}>
-          {postsSorted.map((post) => {
-            const { content, id, date } = post;
-            return (
-              <li key={id}>
-                <Post
-                  content={content}
-                  date={new Intl.DateTimeFormat('en-US', {
-                    dateStyle: 'short',
-                    timeStyle: 'short',
-                  }).format(new Date(date))}
-                />
-              </li>
-            );
-          })}
-        </ul>
-
-        {user && <PostForm onSubmit={handleSubmit} />}
-
         {!user && (
           <p>
-            <button onClick={logIn}>Login</button>
+            <button className={styles.logInBtn} onClick={logIn}>
+              Login
+            </button>
           </p>
         )}
 
         {user && (
           <p>
-            <button className={styles.logout} onClick={logOut}>
+            <button className={styles.logInBtn} onClick={logOut}>
               Logout
             </button>
           </p>

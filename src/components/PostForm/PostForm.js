@@ -23,7 +23,7 @@ const PostForm = ({ onSubmit }) => {
         className={styles.postForm}
         aria-label='Write your post'
       ></textarea>
-      <button>Shout</button>
+      <button>Shout Into The Void!</button>
     </form>
   );
 };

@@ -12,6 +12,8 @@ export default function Home({ posts: defaultPosts }) {
 
   const { user, logIn, logOut } = useAuth();
 
+  const { user_metadata: userMetadata } = user;
+
   const postsSorted = posts.sort((a, b) => {
     return new Date(b.date) - new Date(a.date);
   });
@@ -32,24 +34,12 @@ export default function Home({ posts: defaultPosts }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      {!user && (
-        <p>
-          <button onClick={logIn}>login</button>
-        </p>
-      )}
-
-      {user && (
-        <p>
-          <button onClick={logOut}>logout</button>
-        </p>
-      )}
-
       <main className={styles.main}>
         <Bio
-          headshot='https://pbs.twimg.com/profile_images/1289388663311175680/oMuZZv67_400x400.jpg'
-          name='David Metcalf'
-          tagline='web developer'
-          role='frontend @ MLtwist.com'
+          headshot={userMetadata.avatar_url}
+          name={userMetadata.full_name}
+          tagline='this is your void.'
+          role='what will you shout?'
         />
 
         <ul className={styles.posts}>
@@ -70,6 +60,20 @@ export default function Home({ posts: defaultPosts }) {
         </ul>
 
         {user && <PostForm onSubmit={handleSubmit} />}
+
+        {!user && (
+          <p>
+            <button onClick={logIn}>Login</button>
+          </p>
+        )}
+
+        {user && (
+          <p>
+            <button className={styles.logout} onClick={logOut}>
+              Logout
+            </button>
+          </p>
+        )}
       </main>
     </div>
   );

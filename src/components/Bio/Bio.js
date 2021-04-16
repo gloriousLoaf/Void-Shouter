@@ -6,10 +6,10 @@ const Bio = ({ headshot, name, tagline, role }) => {
       <div>
         <img src={headshot} alt={`Headshot of ${name}`} />
       </div>
-      <div className={styles.bioContent}>
-        <p className={styles.bioContentName}>{name}</p>
-        <p className={styles.bioContentTagline}>{tagline}</p>
-        <p className={styles.bioContentRole}>{role}</p>
+      <div>
+        <p>{name}</p>
+        <p>{tagline}</p>
+        <p>{role}</p>
       </div>
     </div>
   );

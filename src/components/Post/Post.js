@@ -8,12 +8,11 @@ const Post = ({ content, date }) => {
       <p className={styles.postsContent}>{content}</p>
       <ul>
         <li>
-          <FaHeart />
-          23
+          <FaHeart />0
         </li>
         <li>
           <FaShareAlt />
-          Share
+          Can't Share
         </li>
         <li>{date}</li>
       </ul>
